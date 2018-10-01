@@ -1,7 +1,7 @@
 ## Image Classifier Project Part 2 - Make predictions
 
 ''' Basic usage
-python predict.py /path/to/image checkpoint
+python predict.py ./aipnd-project/flowers/test/image_06743.jpg checkpoint
 
 ''' 
 
@@ -21,9 +21,22 @@ import argparse
 
 # load a checkpoint and rebuilds the model function
 def load_checkpoint(filepath, arch):
+    
+    #load check point
     checkpoint = torch.load(filepath)
+    
+    #compare checkpoint arch with parametered arch
     if checkpoint['arch'] == arch:
-        model = models.vgg16(pretrained=True)
+        
+        if arch == 'vgg19':
+            model = models.vgg19(pretrained=True)
+        elseif arch == 'vgg16':
+            model = models.vgg16(pretrained=True)
+        elif arch == 'alexnet':
+            model = models.alexnet(pretrained=True)
+        elif arch == 'densenet':
+            model = models.densenet121(pretrained=True)    
+        
         model.classifier = checkpoint['classifier']
         model.load_state_dict(checkpoint['state_dict'])
         model.class_to_idx = checkpoint['class_to_idx']

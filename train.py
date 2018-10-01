@@ -4,7 +4,7 @@
 python train.py flowers
 
 ''' 
-
+# TODO : Package Imports - All the necessary packages and modules are imported in the first cell of the notebook
 # Import libraries here
 import os
 import sys
@@ -90,8 +90,8 @@ def train_model(model, train_loader, valid_loader, learning_rate, gpu, epochs):
                 equality = (labels.data == predicted)
                 valid_accuracy += equality.type_as(torch.FloatTensor()).mean()
                 total = len(valid_loader)
-        print('Test Loss: {:.3f}'.format(valid_loss / total),
-              'Test Accuracy: {:.3f}'.format(valid_accuracy / total))
+        print('Validation Loss: {:.3f}'.format(valid_loss / total),
+              'Validation Accuracy: {:.3f}'.format(valid_accuracy / total))
         print('Testing time per epoch: {:.3f} second(s)'.format(time.time() - starttime))
         model.train()
     print('info : the model training is completed')
@@ -182,8 +182,8 @@ if __name__ == '__main__':
         print('info : could not create directory')
         sys.exit(1)
         
-    # check validity for arch
-    arch_list = ['vgg19', 'vgg16', 'vgg16_bn']
+    # check validity for arch, same should be supported
+    arch_list = ['vgg19', 'vgg16', 'alexnet', 'densenet121']
     if args.arch not in arch_list:
         print('info : arch only support {}'.format(arch_list))
         sys.exit(2)
